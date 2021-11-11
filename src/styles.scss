@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+$font-family-sans-serif: "Oswald", sans-serif;
+$font-family-serif: "Roboto", sans-serif;
+
+$principal: #6d9886;
+$secundario: #d9cab3;
+$negro: #212121;
+$blanco: #f6f6f6;
+
+.button {
+  background-color: $principal;
+  border-radius: 5px;
+  color: white;
+  padding: 4px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.line:before,
+.line:after {
+  flex-grow: 1;
+  height: 2px;
+  content: "\a0";
+  background-color: $principal;
+  position: relative;
+  top: 0.5em;
+}
+
+.line:before {
+  margin-right: 10px;
+}
+
+.line:after {
+  margin-left: 10px;
+}
+
+.link {
+  color: $principal;
+  font-weight: bold;
+}

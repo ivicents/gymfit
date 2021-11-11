@@ -1,1 +1,76 @@
-<p>login works!</p>
+<div class="login" id="bg-img-login">
+    <img src="../../../../assets/img/logo.png" alt="gymfit" class="logo-login center">
+    
+      <div class="alert alert-secondary" *ngIf="status === 'success'">
+        Identificado correctamente.
+      </div>
+    
+      <div class="alert alert-danger" *ngIf="status === 'error'">
+        Error al identificarte.
+      </div>
+
+      <div class="center">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div>
+            <input placeholder="Email" type="email" [formControl]="email" />
+          </div>
+      
+          <div>
+            <input placeholder="Password" type="password" [formControl]="password" />
+          </div>
+      
+          <button class="button mt-3" type="submit" [disabled]="!loginForm.valid">LOGIN</button>
+        </form>
+
+        <h5 class="line">OR</h5>
+
+        <a class="link" href="./register">Create an account</a>
+      </div>
+    </div>
+    
+    <div *ngIf="email.errors">
+      <span
+        style="color: red"
+        *ngIf="email.errors && (email.touched || email.dirty)"
+      >
+        <span *ngIf="email.errors.required">Email is required</span>
+        <div *ngIf="email.errors.pattern">Email not a valid format.</div>
+      </span>
+    </div>
+    
+    <div *ngIf="password.errors">
+      <span
+        style="color: red"
+        *ngIf="password.errors && (password.touched || password.dirty)"
+      >
+        <span *ngIf="password.errors.required">Password is required</span>
+        <span *ngIf="password.errors.minlength"
+          >Password must be greater tha 8 characters</span
+        >
+        <span *ngIf="password.errors.maxlength"
+          >Password can be max 16 characters long</span
+        >
+      </span>
+    <!-- </div>
+      <form #signinForm="ngForm" (ngSubmit)="onSubmit(signinForm)">
+        <p>
+          <label for="email">Email<span class="verde">*</span></label>
+          <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control"  required>
+          <span *ngIf="!email.valid && email.touched">
+            El email no es válido
+          </span>
+        </p>
+    
+        <p>
+          <label for="password">Contraseña<span class="verde">*</span></label>
+          <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
+          <span *ngIf="!password.valid && password.touched">
+            La contraseña no es valida
+          </span>
+        </p>
+    
+        <input type="submit" value="Entrar" class="btn btn-primary" [disabled]="!signinForm.form.valid">
+    
+      </form>
+    </div> -->
+</div>
