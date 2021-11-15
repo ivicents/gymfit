@@ -5,9 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthDTO } from 'src/app/models/auth.dto';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,8 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private localStorageService: LocalStorageService
   ) {
     this.user = new AuthDTO('', '', '', 'juan@gmail.com', 'testtest');
     this.status = '';
@@ -48,38 +49,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    console.log(this.user);
-
-    // this._userservice.signin(this.user).subscribe(
-    //   (response) => {
-    //     if (response.status != 'error') {
-    //       this.status = 'success';
-    //       //token
-    //       this.token = response;
-    //       localStorage.setItem('token', this.token);
-
-    //       //Objeto usuario identificado
-    //       this._userservice.signin(this.user, true).subscribe(
-    //         (response) => {
-    //           this.identity = response;
-    //           localStorage.setItem('identity', JSON.stringify(this.identity));
-    //           this._router.navigate(['dashboard']);
-    //         },
-    //         (error) => {
-    //           console.log(<any>error);
-    //         }
-    //       );
-    //     } else {
-    //       this.status = 'error';
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log(<any>error);
-    //   }
-    // );
-  }
-
   async login(): Promise<void> {
     let responseOK: boolean = false;
     let errorResponse: any;
@@ -90,13 +59,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user).subscribe(
       (user) => {
         responseOK = true;
-        // this.loginUser.access_token = user.access_token;
-        // save token to localstorage for next requests
-        // this.localStorageService.set('user_id', this.loginUser.user_id);
-        // this.localStorageService.set(
-        //   'access_token',
-        //   this.loginUser.access_token
-        // );
+        this.user.access_token = user.access_token;
+        this.localStorageService.set('access_token', this.user.access_token);
+        this.localStorageService.set('mode', 'user');
+
         this._router.navigate(['profile']);
       },
       (error) => {
@@ -105,19 +71,5 @@ export class LoginComponent implements OnInit {
         errorResponse = error.error;
       }
     );
-  }
-
-  login2() {
-    // this._route.params.subscribe((params) => {
-    //   let signout = +params['sure'];
-    //   if (signout == 1) {
-    //     localStorage.removeItem('identity');
-    //     localStorage.removeItem('token');
-    //     this.identity = null;
-    //     this.token = null;
-    //     //redirección
-    //     this._router.navigate(['home']);
-    //   }
-    // });
   }
 }

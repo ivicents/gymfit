@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { UserDTO } from '../../../models/user.dto';
 
@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private _route: ActivatedRoute,
     private _router: Router
   ) {
     this.user = new UserDTO(
@@ -97,13 +96,10 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.user).subscribe(
       (user) => {
         responseOK = true;
-        // this.loginUser.access_token = user.access_token;
-        // save token to localstorage for next requests
-        // this.localStorageService.set('user_id', this.loginUser.user_id);
-        // this.localStorageService.set(
-        //   'access_token',
-        //   this.loginUser.access_token
-        // );
+        this.registerForm.reset();
+        // After reset form we set birthDate to today again (is an example)
+        this.birthday.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+
         this._router.navigate(['profile']);
       },
       (error) => {

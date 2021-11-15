@@ -16,7 +16,6 @@ export class UserService {
   }
 
   register(user: UserDTO): Observable<UserDTO> {
-    console.log('Enviamos user ', user);
     return this.http.post<UserDTO>(this.urlGymfit, user);
   }
 

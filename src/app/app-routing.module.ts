@@ -47,11 +47,6 @@ const routes: Routes = [
     component: IncidencesComponent,
     canActivate: [AuthGuard],
   },
-  //   {
-  //     path: 'user/post/:id',
-  //     component: PostFormComponent,
-  //     canActivate: [AuthGuard],
-  //   },
   {
     path: 'monitor/login',
     component: LoginMonitorComponent,
@@ -75,6 +70,10 @@ const routes: Routes = [
     path: 'monitor/incidences',
     component: IncidencesMonitorComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: LoginComponent,
   },
 ];
 
