@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserDTO } from '../models/user.dto';
+import { AuthDTO } from '../models/auth.dto';
 
 interface AuthToken {
   user_id: string;
@@ -21,8 +21,8 @@ export class AuthService {
     this.urlGymfit = 'http://localhost:3100/' + this.controller;
   }
 
-  login(auth: UserDTO): Observable<AuthToken> {
-    return this.http.post<AuthToken>(this.urlGymfit, auth).pipe(
+  login({ email, password }: AuthDTO): Observable<AuthToken> {
+    return this.http.post<AuthToken>(this.urlGymfit, { email, password }).pipe(
       map((resp: any) => {
         return resp;
       })

@@ -1,1 +1,117 @@
-<p>register works!</p>
+<div class="register" id="bg-img-register">
+    <div class="center register-background">
+        <img src="../../../../assets/img/logo.png" alt="gymfit" class="logo-register center">
+        <h3>CREATE AN ACCOUNT</h3>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div>
+                <input placeholder="Name" type="text" [formControl]="name" />
+            </div>
+
+            <div>
+                <input placeholder="Surname" type="text" [formControl]="surname" />
+            </div>
+            
+            <div>
+              <input placeholder="Email" type="email" [formControl]="email" />
+            </div>
+        
+            <div>
+              <input placeholder="Password" type="password" [formControl]="password" />
+            </div>
+
+            <div>
+                <input placeholder="Birth date" type="date" [formControl]="birthday" />
+            </div>
+
+
+            <label >Gender</label>
+            <div class="gender-selector">
+                <input type="radio" name="option" value="female" id="genderFemale" [formControl]="gender">
+                <label for="genderFemale">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x female"></i>
+                <i class="fa fa-venus fa-stack-1x fa-inverse"></i>
+              </span>
+                </label>
+                <input type="radio" name="option" value="male" id="genderMale" [formControl]="gender" checked/>
+                <label for="genderMale">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x male"></i>
+                <i class="fa fa-mars fa-stack-1x fa-inverse"></i>
+              </span>
+                </label>
+              </div>
+        
+            <button class="button mt-3" type="submit" [disabled]="!registerForm.valid">REGISTER</button>
+          </form>
+
+          <div *ngIf="name.errors">
+            <span
+              style="color: red"
+              *ngIf="name.errors && (name.touched || name.dirty)"
+            >
+              <span *ngIf="name.errors.required">Name is required</span>
+              <span *ngIf="name.errors.minlength">Name must be at least 3 characters long.</span>
+              <span *ngIf="name.errors.maxlength">Name can be max 25 characters long.</span>   
+            </span>         
+          </div>
+
+          <div *ngIf="surname.errors">
+            <span
+              style="color: red"
+              *ngIf="surname.errors && (surname.touched || surname.dirty)"
+            >
+              <span *ngIf="surname.errors.required">Surname is required</span>
+              <span *ngIf="surname.errors.minlength">Surname must be at least 5 characters long.</span>
+              <span *ngIf="surname.errors.maxlength">Surname can be max 25 characters long.</span>    
+            </span>       
+          </div>
+
+          <div *ngIf="email.errors">
+            <span
+              style="color: red"
+              *ngIf="email.errors && (email.touched || email.dirty)"
+            >
+              <span *ngIf="email.errors.required">Email is required</span>
+              <div *ngIf="email.errors.pattern">Email not a valid format.</div>
+            </span>
+          </div>
+          
+          <div *ngIf="password.errors">
+            <span
+              style="color: red"
+              *ngIf="password.errors && (password.touched || password.dirty)"
+            >
+              <span *ngIf="password.errors.required">Password is required</span>
+              <span *ngIf="password.errors.minlength"
+                >Password must be greater tha 8 characters</span
+              >
+              <span *ngIf="password.errors.maxlength"
+                >Password can be max 16 characters long</span
+              >
+            </span>
+          </div>
+
+          <div *ngIf="birthday.errors">
+            <span
+              style="color: red"
+              *ngIf="birthday.errors && (birthday.touched || birthday.dirty)"
+            >
+              <span *ngIf="birthday.errors.required">Birthday is required</span>
+            </span> 
+          </div>
+
+          <div *ngIf="gender.errors">
+            <span
+              style="color: red"
+              *ngIf="gender.errors && (gender.touched || gender.dirty)"
+            >
+              <span *ngIf="gender.errors.required">Gender is required</span>
+            </span> 
+          </div>
+  
+          <h5 class="line">OR</h5>
+  
+          <a class="link" href="./login">Already have an account?</a>
+    </div>
+</div>

@@ -6,15 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthDTO } from 'src/app/models/auth.dto';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserDTO } from '../../../models/user.dto';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public user: UserDTO;
+  public user: AuthDTO;
   public status: string;
   email: FormControl;
   password: FormControl;
@@ -26,15 +26,15 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-    this.user = new UserDTO('', '');
+    this.user = new AuthDTO('', '', 'juan@gmail.com', 'testtest');
     this.status = '';
 
-    this.email = new FormControl('', [
+    this.email = new FormControl(this.user.email, [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
     ]);
 
-    this.password = new FormControl('', [
+    this.password = new FormControl(this.user.password, [
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(16),
