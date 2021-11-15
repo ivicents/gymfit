@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { StatisticsComponent } from './components/user/statistics/statistics.component';
 import { WorkoutsComponent } from './components/user/workouts/workouts.component';
+import { AuthGuard } from './guards/auth.guards';
 //import { AuthGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
@@ -29,20 +30,22 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'workouts',
     component: WorkoutsComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'statistics',
     component: StatisticsComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'incidences',
     component: IncidencesComponent,
+    canActivate: [AuthGuard],
   },
   //   {
   //     path: 'user/post/:id',
@@ -56,18 +59,22 @@ const routes: Routes = [
   {
     path: 'monitor/profile',
     component: ProfileMonitorComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'monitor/users',
     component: UsersMonitorComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'monitor/workouts',
     component: WorkoutsMonitorComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'monitor/incidences',
     component: IncidencesMonitorComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

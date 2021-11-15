@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router
   ) {
-    this.user = new AuthDTO('', '', 'juan@gmail.com', 'testtest');
+    this.user = new AuthDTO('', '', '', 'juan@gmail.com', 'testtest');
     this.status = '';
 
     this.email = new FormControl(this.user.email, [
@@ -89,7 +89,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.user).subscribe(
       (user) => {
-        console.log('Response es ', user);
         responseOK = true;
         // this.loginUser.access_token = user.access_token;
         // save token to localstorage for next requests

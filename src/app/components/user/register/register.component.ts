@@ -93,11 +93,9 @@ export class RegisterComponent implements OnInit {
     this.user.email = this.email.value;
     this.user.password = this.password.value;
     this.user = this.registerForm.value;
-    console.log('user to save ', this.registerForm.value);
 
     this.userService.register(this.user).subscribe(
       (user) => {
-        console.log('Response es ', user);
         responseOK = true;
         // this.loginUser.access_token = user.access_token;
         // save token to localstorage for next requests
