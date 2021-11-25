@@ -1,0 +1,27 @@
+.incidences-content::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: url(../../../../assets/img/background.jpg) no-repeat center center
+    fixed;
+  background-size: cover;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.incidences-content::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: url(../../../../assets/img/background_incidence.jpg) no-repeat
+    center center fixed;
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+}
