@@ -40,3 +40,29 @@ $blanco: #f6f6f6;
   color: $principal;
   font-weight: bold;
 }
+
+.navbar {
+  background-color: $secundario;
+
+  .container {
+    .navbar-collapse {
+      .navbar-nav {
+        > li {
+          > a {
+            color: $blanco;
+            &:hover,
+            &:focus {
+              color: $principal;
+            }
+          }
+        }
+        & .nav-item {
+          & .active {
+            color: $principal;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
