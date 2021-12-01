@@ -11,3 +11,27 @@
   opacity: 1;
   z-index: -1;
 }
+
+.profile-content img {
+  max-width: 40%;
+}
+
+/* CUSTOM RADIO */
+.gender-selector {
+  margin-top: 16px;
+}
+
+.gender-selector > input[type="radio"] {
+  display: none;
+}
+.gender-selector > input[type="radio"] + label .fa-circle {
+  color: silver;
+  transition: color 0.2s ease;
+}
+.gender-selector > input[type="radio"]:checked + label .male {
+  color: deepskyblue;
+}
+.gender-selector > input[type="radio"]:checked + label .female {
+  color: pink;
+}
+/* END CUSTOM RADIO */
