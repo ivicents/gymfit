@@ -1,15 +1,72 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.css']
+  styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent implements OnInit {
+  chartOption: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+      },
+    ],
+  };
 
-  constructor() { }
+  options2: any;
+  constructor() {}
 
   ngOnInit(): void {
-  }
+    const xAxisData = [];
+    const data1 = [];
+    const data2 = [];
 
+    for (let i = 0; i < 100; i++) {
+      xAxisData.push('category' + i);
+      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+    }
+
+    this.options2 = {
+      legend: {
+        data: ['bar', 'bar2'],
+        align: 'left',
+      },
+      tooltip: {},
+      xAxis: {
+        data: xAxisData,
+        silent: false,
+        splitLine: {
+          show: false,
+        },
+      },
+      yAxis: {},
+      series: [
+        {
+          name: 'bar',
+          type: 'bar',
+          data: data1,
+          animationDelay: (idx: number) => idx * 1000,
+        },
+        {
+          name: 'bar2',
+          type: 'bar',
+          data: data2,
+          animationDelay: (idx: number) => idx * 100 + 100,
+        },
+      ],
+      animationEasing: 'elasticOut',
+      animationDelayUpdate: (idx: number) => idx * 500,
+    };
+  }
 }

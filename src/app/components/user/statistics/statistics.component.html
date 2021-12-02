@@ -26,5 +26,22 @@
     </div>
 </nav>
 <div class="statistics-content">
-    <p>statistics works!</p>
+    <div id="app" class="flex-container">
+        <div class="flex-item">
+            <h5>Acceso al gimnasio este año</h5>
+            <div echarts [options]="chartOption" class="demo-chart"></div>
+        </div>
+        <div class="flex-item">
+            <h5>Gente en el gimnasio esta semana</h5>
+            <div echarts [options]="options2" class="demo-chart"></div>
+        </div>
+        <div class="flex-item">
+            <h5>Tiempo de entrene esta semana</h5>
+            <div echarts [options]="options2" class="demo-chart"></div>
+        </div>
+        <div class="flex-item">
+            <h5>Rutinas completadas este mes</h5>
+            <div echarts [options]="chartOption" class="demo-chart"></div>
+        </div>
+      </div>
 </div>
