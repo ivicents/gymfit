@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserDTO } from '../models/user.dto';
+import { WorkoutDTO } from '../models/workout.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +26,11 @@ export class UserService {
 
   getUSerById(userId: string): Observable<UserDTO> {
     return this.http.get<UserDTO>(this.urlGymfit + '/' + userId);
+  }
+
+  getUserWorkout(userId: string): Observable<WorkoutDTO> {
+    return this.http.get<WorkoutDTO>(
+      'http://localhost:3100/workout/user' + '/' + userId
+    );
   }
 }

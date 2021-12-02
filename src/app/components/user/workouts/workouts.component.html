@@ -25,6 +25,24 @@
         </div>
     </div>
 </nav>
+
 <div class="workouts-content">
-    <p>workouts works!</p>
+    <div class="row">
+        <div class="col">
+            <h5>{{workout.name}}</h5>
+            <div class="user-exercises">
+                <div *ngFor="let exercise of workout.exercises">
+                    <p> Name: {{exercise.name}} <br></p>
+                    {{exercise.description}} <br>
+                    {{exercise.repetitions}} <br>
+                    {{exercise.weight}}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <button class="button mt-3" type="submit">EMPEZAR RUTINA</button>
+            <br>
+            <button class="button mt-3" type="submit">PARAR RUTINA</button>
+        </div>
+    </div>
 </div>
