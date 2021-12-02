@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
       (user) => {
         responseOK = true;
         this.user.access_token = user.access_token;
-        this.localStorageService.set('access_token', this.user.access_token);
+        this.localStorageService.set('access_token', user.access_token);
+        this.localStorageService.set('user_id', user.user_id);
         this.localStorageService.set('mode', 'user');
 
         this._router.navigate(['profile']);

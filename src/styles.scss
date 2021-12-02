@@ -18,6 +18,10 @@ $blanco: #f6f6f6;
   text-decoration: none;
 }
 
+.button:hover {
+  background-color: $secundario;
+}
+
 .line:before,
 .line:after {
   flex-grow: 1;

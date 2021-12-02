@@ -11,7 +11,7 @@ export class UserService {
   private controller: string;
 
   constructor(private http: HttpClient) {
-    this.controller = 'register';
+    this.controller = 'user';
     this.urlGymfit = 'http://localhost:3100/' + this.controller;
   }
 

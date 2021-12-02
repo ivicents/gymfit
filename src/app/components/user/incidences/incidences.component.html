@@ -26,6 +26,32 @@
     </div>
 </nav>
 <div class="incidences-content incidences-content-img">
-    <p>incidences works!</p>
+    <div class="center incidences-background">
+        <h5>Algún problema? Háznoslo saber!</h5>
+        <p>
+            Estaremos encantados de ayudarte con los problemas o dudas que
+            puedas tener, porfavor escribe mas abajo tu problema para que 
+            podamos ayudarte.
+        </p>
+        <form [formGroup]="incidenceForm" (ngSubmit)="sendIncidence()">
+            <div>
+                <textarea placeholder="Explica tu incidencia" rows="10" [formControl]="text"></textarea>
+            </div>
+        
+            <button class="button mt-3" type="submit" [disabled]="!incidenceForm.valid">ENVIAR</button>
+          </form>
+
+          <div *ngIf="text.errors">
+            <span
+              style="color: red"
+              *ngIf="text.errors && (text.touched || text.dirty)"
+            >
+              <span *ngIf="text.errors.required">Info is required</span>
+              <span *ngIf="text.errors.minlength">Information must be at least 8 characters long.</span>
+              <span *ngIf="text.errors.maxlength">Information can be max 250 characters long</span>
+            </span>         
+          </div>
+
+    </div>
 </div>
 
