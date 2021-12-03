@@ -61,7 +61,6 @@ export class ProfileComponent implements OnInit {
     this.password = new FormControl(this.profileUser.password, [
       Validators.required,
       Validators.minLength(8),
-      Validators.maxLength(16),
     ]);
 
     this.birthday = new FormControl(
