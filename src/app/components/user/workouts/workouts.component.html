@@ -32,17 +32,18 @@
             <h5>{{workout.name}}</h5>
             <div class="user-exercises">
                 <div *ngFor="let exercise of workout.exercises">
-                    <p> Name: {{exercise.name}} <br></p>
-                    {{exercise.description}} <br>
-                    {{exercise.repetitions}} <br>
-                    {{exercise.weight}}
+                    <div class="exercise-card">
+                        <b>{{exercise.name}}</b> <br>
+                        Repeticiones: {{exercise.repetitions}} <br>
+                        Peso: {{exercise.weight}} Kg<br>
+                        {{exercise.description}} 
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <button class="button mt-3" type="submit">EMPEZAR RUTINA</button>
-            <br>
-            <button class="button mt-3" type="submit">PARAR RUTINA</button>
+        <div class="col-4 workout-buttons">
+            <button class="button-secondary mt-3" *ngIf="!this.workoutStarted" (click)="startWorkout()">EMPEZAR RUTINA</button>
+            <button class="button mt-3" *ngIf="this.workoutStarted" (click)="stopWorkout()">PARAR RUTINA</button>
         </div>
     </div>
 </div>

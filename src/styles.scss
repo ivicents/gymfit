@@ -16,10 +16,26 @@ $blanco: #f6f6f6;
   padding: 4px 16px;
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .button:hover {
   background-color: $secundario;
+}
+
+.button-secondary {
+  background-color: $secundario;
+  border-radius: 5px;
+  color: black;
+  padding: 4px 16px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.button-secondary:hover {
+  background-color: $principal;
+  color: white;
 }
 
 .line:before,
@@ -71,5 +87,11 @@ $blanco: #f6f6f6;
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

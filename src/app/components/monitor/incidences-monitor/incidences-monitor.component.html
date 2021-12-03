@@ -1,1 +1,57 @@
-<p>incidences-monitor works!</p>
+<!-- Navigation -->
+<nav class="header-navbar navbar navbar-expand-lg navbar-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/monitor/profile">
+            <img src="../../../../assets/img/logo.png" alt="Gymfit logo" height="36">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/monitor/profile">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/monitor/users">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/monitor/workouts">Rutinas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/monitor/incidences">Incidencias</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="incidences-content incidences-content-img">
+    <div class="center incidences-background">
+        <h5>Algún problema? Háznoslo saber!</h5>
+        <p>
+            Estaremos encantados de ayudarte con los problemas o dudas que
+            puedas tener, porfavor escribe mas abajo tu problema para que 
+            podamos ayudarte.
+        </p>
+        <form [formGroup]="incidenceForm" (ngSubmit)="sendIncidence()">
+            <div>
+                <textarea placeholder="Explica tu incidencia" rows="10" [formControl]="text"></textarea>
+            </div>
+        
+            <button class="button mt-3" type="submit" [disabled]="!incidenceForm.valid">ENVIAR</button>
+          </form>
+
+          <div *ngIf="text.errors">
+            <span
+              style="color: red"
+              *ngIf="text.errors && (text.touched || text.dirty)"
+            >
+              <span *ngIf="text.errors.required">Info is required</span>
+              <span *ngIf="text.errors.minlength">Information must be at least 8 characters long.</span>
+              <span *ngIf="text.errors.maxlength">Information can be max 250 characters long</span>
+            </span>         
+          </div>
+
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class WorkoutsComponent implements OnInit {
   workout!: WorkoutDTO;
+  workoutStarted: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,6 +19,7 @@ export class WorkoutsComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {
     this.workout = new WorkoutDTO('', []);
+    this.workoutStarted = false;
   }
 
   ngOnInit(): void {
@@ -36,6 +38,38 @@ export class WorkoutsComponent implements OnInit {
           //TODO: Mostrar error
         }
       );
+    }
+  }
+
+  startWorkout(): void {
+    const userId = this.localStorageService.get('user_id');
+    if (this.workout.id && userId) {
+      this.userService.startWorkout(userId, this.workout.id).subscribe(
+        () => {
+          this.workoutStarted = true;
+        },
+        (error) => {
+          //TODO: Mostrar error
+        }
+      );
+    } else {
+      //TODO: Mostrar error
+    }
+  }
+
+  stopWorkout(): void {
+    const userId = this.localStorageService.get('user_id');
+    if (this.workout.id && userId) {
+      this.userService.stopWorkout(userId, this.workout.id).subscribe(
+        () => {
+          this.workoutStarted = false;
+        },
+        (error) => {
+          //TODO: Mostrar error
+        }
+      );
+    } else {
+      //TODO: Mostrar error
     }
   }
 }

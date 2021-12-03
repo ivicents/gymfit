@@ -29,12 +29,13 @@ export class AuthService {
     );
   }
 
-  login2(username: string, password: string): Observable<AuthToken> {
-    return this.http.post(this.urlGymfit, { username, password }).pipe(
-      map((resp: any) => {
-        //this.userStore.token = resp.token;
-        return resp;
-      })
-    );
+  loginMonitor({ email, password }: AuthDTO): Observable<AuthToken> {
+    return this.http
+      .post<AuthToken>(this.urlGymfit + '/monitor', { email, password })
+      .pipe(
+        map((resp: any) => {
+          return resp;
+        })
+      );
   }
 }

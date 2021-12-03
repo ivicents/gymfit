@@ -1,0 +1,55 @@
+@import "../../../../styles.scss";
+
+.login {
+  opacity: 0.99;
+}
+
+.login::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: url(../../../../assets/img/background_login.jpg) no-repeat center
+    center fixed;
+  background-size: cover;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.logo-login {
+  max-width: 200px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+div {
+  text-align: center;
+}
+
+form {
+  display: inline-block;
+}
+
+.error {
+  color: red;
+}
+
+#loginFeedback {
+  visibility: hidden;
+  min-width: 250px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+}

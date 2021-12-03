@@ -33,4 +33,17 @@ export class UserService {
       'http://localhost:3100/workout/user' + '/' + userId
     );
   }
+
+  startWorkout(userId: string, workoutId: string): Observable<void> {
+    return this.http.post<any>(this.urlGymfit + '/startWorkout', {
+      userId,
+      workoutId,
+    });
+  }
+  stopWorkout(userId: string, workoutId: string): Observable<void> {
+    return this.http.post<any>(this.urlGymfit + '/stopWorkout', {
+      userId,
+      workoutId,
+    });
+  }
 }
