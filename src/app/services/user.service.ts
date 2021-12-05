@@ -46,4 +46,11 @@ export class UserService {
       workoutId,
     });
   }
+
+  updateUserWorkout(userId: string, workoutId: string): Observable<void> {
+    return this.http.put<void>(
+      this.urlGymfit + '/' + userId + '/updateWorkout',
+      { workoutId }
+    );
+  }
 }

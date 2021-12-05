@@ -1,0 +1,47 @@
+.monitor-users-content::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: url(../../../../assets/img/background.jpg) no-repeat center center
+    fixed;
+  background-size: cover;
+  opacity: 1;
+  z-index: -1;
+}
+
+.monitor-users-content {
+  width: 95vw;
+  margin-top: 32px;
+}
+
+.user-list {
+  overflow-y: auto;
+  height: 80vh;
+}
+
+.user-card {
+  background-color: rgb(228, 228, 224);
+  margin: 8px;
+  padding: 8px;
+}
+
+.monitor-users {
+  margin: 24px;
+}
+
+.monitor-user-img {
+  margin-right: 16px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+.monitor-user-selected-img {
+  margin-right: 16px;
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+}

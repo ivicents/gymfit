@@ -25,3 +25,39 @@
         </div>
     </div>
 </nav>
+
+<div class="monitor-users-content">
+    <div class="row">
+        <div class="col monitor-users">
+            <h5>Mis usuarios</h5>
+            <div class="user-list">
+                <div *ngFor="let user of userList">
+                    <div class="user-card" (click)="selectUser(user)">
+                        <img class="monitor-user-img" src="../../../../assets/img/profile_user.jpg" alt="imagen del usuario">
+                        <b>{{user.name}} {{user.surname}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col user-selected">
+            <h5>Usuario seleccionado</h5>
+            <div class="user-card">
+                <img class="monitor-user-selected-img" src="../../../../assets/img/profile_user.jpg" alt="imagen del usuario">
+                <b>{{userSelected?.name}} {{userSelected?.surname}}</b> <br>
+                <b>Fecha nacimiento:</b> {{userSelected?.birthday | date:"dd/MM/yyyy"}} <br>
+                <b>Genero:</b> {{userSelected?.gender}} <br>
+                <b>Email:</b> {{userSelected?.email}} <br>
+            </div>
+            <br>
+            <h5>Rutinas disponibles</h5>
+            <div [formGroup]="workoutForm">
+                <select class="custom-select" [ngModel]="workoutSelected" (ngModelChange)="changeWorkout($event)" formControlName="workout">
+                    <option value="" disabled>Elige la rutina</option>
+                    <option *ngFor="let workout of monitorWorkouts" [ngValue]="workout">{{workout?.name}}</option>
+                 </select>
+            </div>
+           
+            <button class="button mt-3" (click)="updateUserWorkout()">CAMBIAR RUTINA</button>
+        </div>
+    </div>
+</div>

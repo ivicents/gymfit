@@ -25,3 +25,19 @@
         </div>
     </div>
 </nav>
+
+<div class="workouts-content">
+    <div class="row">
+        <div class="col">
+            <h5>Mis rutinas</h5>
+                <div *ngFor="let workout of monitorWorkouts">
+                    <div class="workout-card">
+                        <b>{{workout.name}}</b>
+                    </div>
+                </div>
+        </div>
+        <div class="col-4 workout-buttons">
+            <button class="button mt-3" (click)="createWorkout()">CREAR RUTINA</button>
+        </div>
+    </div>
+</div>
