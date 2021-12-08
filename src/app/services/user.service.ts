@@ -17,7 +17,7 @@ export class UserService {
   }
 
   register(user: UserDTO): Observable<UserDTO> {
-    return this.http.post<UserDTO>(this.urlGymfit, user);
+    return this.http.post<UserDTO>('http://localhost:3100/register', user);
   }
 
   updateUser(userId: string, user: UserDTO): Observable<UserDTO> {

@@ -5,8 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { IncidenceService } from 'src/app/services/incidence.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-incidences-monitor',
@@ -21,6 +23,7 @@ export class IncidencesMonitorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private incidenceService: IncidenceService,
+    private sharedService: SharedService,
     private localStorageService: LocalStorageService
   ) {
     this.isValidForm = null;
@@ -45,16 +48,22 @@ export class IncidencesMonitorComponent implements OnInit {
 
     this.incidenceService
       .sendIncidence(this.incidenceForm.value.text, null, monitorId)
+      .pipe(
+        finalize(async () => {
+          await this.sharedService.managementToast(
+            'toastFeedback',
+            responseOK,
+            errorResponse,
+            'Incidencia enviada correctamente'
+          );
+        })
+      )
       .subscribe(
         () => {
           responseOK = true;
           this.incidenceForm.reset();
-          //TODO: Show toast
-
-          //this._router.navigate(['profile']);
         },
         (error) => {
-          console.log('Error es ', error);
           responseOK = false;
           errorResponse = error.error;
         }

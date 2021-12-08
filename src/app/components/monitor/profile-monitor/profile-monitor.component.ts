@@ -10,6 +10,7 @@ import { finalize } from 'rxjs/operators';
 import { MonitorDTO } from 'src/app/models/monitor.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonitorService } from 'src/app/services/monitor.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-profile-monitor',
@@ -32,6 +33,7 @@ export class ProfileMonitorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private monitorService: MonitorService,
+    private sharedService: SharedService,
     private localStorageService: LocalStorageService
   ) {
     this.profileMonitor = new MonitorDTO('', '', '', new Date(), '', '');
@@ -105,8 +107,8 @@ export class ProfileMonitorComponent implements OnInit {
             gender: this.gender,
           });
         },
-        (error) => {
-          //TODO: Mostrar error
+        async (error) => {
+          await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }
@@ -117,7 +119,6 @@ export class ProfileMonitorComponent implements OnInit {
     this.isValidForm = false;
     let errorResponse: any;
 
-    console.log('llamada 1', this.profileForm);
     if (this.profileForm.invalid) {
       return;
     }
@@ -126,18 +127,17 @@ export class ProfileMonitorComponent implements OnInit {
     this.profileMonitor = this.profileForm.value;
 
     const monitorId = this.localStorageService.get('monitor_id');
-    console.log('llamada ', monitorId);
     if (monitorId) {
       this.monitorService
         .updateMonitor(monitorId, this.profileMonitor)
         .pipe(
           finalize(async () => {
-            // await this.sharedService.managementToast(
-            //   'profileFeedback',
-            //   responseOK,
-            //   errorResponse
-            // );
-            //TODO: Mostrar toast
+            await this.sharedService.managementToast(
+              'toastFeedback',
+              responseOK,
+              undefined,
+              'Datos guardados correctamente'
+            );
           })
         )
         .subscribe(
@@ -147,8 +147,6 @@ export class ProfileMonitorComponent implements OnInit {
           (error) => {
             responseOK = false;
             errorResponse = error.error;
-
-            //this.sharedService.errorLog(errorResponse);
           }
         );
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorkoutDTO } from 'src/app/models/workout.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonitorService } from 'src/app/services/monitor.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-workouts-monitor',
@@ -13,6 +14,7 @@ export class WorkoutsMonitorComponent implements OnInit {
 
   constructor(
     private monitorService: MonitorService,
+    private sharedService: SharedService,
     private localStorageService: LocalStorageService
   ) {
     this.monitorWorkouts = [];
@@ -29,8 +31,8 @@ export class WorkoutsMonitorComponent implements OnInit {
         (rutinas: WorkoutDTO[]) => {
           this.monitorWorkouts = rutinas;
         },
-        (error) => {
-          //TODO: Mostrar error
+        async (error) => {
+          await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }

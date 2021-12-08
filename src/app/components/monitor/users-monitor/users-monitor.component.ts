@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { UserDTO } from 'src/app/models/user.dto';
 import { WorkoutDTO } from 'src/app/models/workout.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonitorService } from 'src/app/services/monitor.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,6 +25,7 @@ export class UsersMonitorComponent implements OnInit {
     private formBuilder: FormBuilder,
     private monitorService: MonitorService,
     private userService: UserService,
+    private sharedService: SharedService,
     private localStorageService: LocalStorageService
   ) {
     this.userList = [];
@@ -49,8 +52,8 @@ export class UsersMonitorComponent implements OnInit {
           this.userList = usuarios;
           this.userSelected = usuarios[0];
         },
-        (error) => {
-          //TODO: Mostrar error
+        async (error) => {
+          await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }
@@ -63,8 +66,8 @@ export class UsersMonitorComponent implements OnInit {
         (rutinas: WorkoutDTO[]) => {
           this.monitorWorkouts = rutinas;
         },
-        (error) => {
-          //TODO: Mostrar error
+        async (error) => {
+          await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }
@@ -78,18 +81,31 @@ export class UsersMonitorComponent implements OnInit {
     this.userSelected = user;
   }
 
-  updateUserWorkout(): void {
+  async updateUserWorkout(): Promise<void> {
+    let responseOK: boolean = false;
     if (this.userSelected && this.workoutSelected) {
       this.userService
         .updateUserWorkout(this.userSelected.id!, this.workoutSelected.id!)
+        .pipe(
+          finalize(async () => {
+            await this.sharedService.managementToast(
+              'toastFeedback',
+              responseOK,
+              undefined,
+              'Rutina actualizada para el usuario ' + this.userSelected?.name
+            );
+          })
+        )
         .subscribe(
           () => {
-            //TODO: Mostrar toast
+            responseOK = true;
           },
           (error) => {
-            //TODO: Mostrar error
+            responseOK = false;
           }
         );
+    } else {
+      await this.sharedService.managementToast('toastFeedback', false);
     }
   }
 }

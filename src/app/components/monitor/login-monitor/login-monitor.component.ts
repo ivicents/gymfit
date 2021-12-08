@@ -6,9 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { AuthDTO } from 'src/app/models/auth.dto';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-login-monitor',
@@ -25,6 +27,7 @@ export class LoginMonitorComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private sharedService: SharedService,
     private _router: Router,
     private localStorageService: LocalStorageService
   ) {
@@ -57,21 +60,34 @@ export class LoginMonitorComponent implements OnInit {
     this.user.email = this.email.value;
     this.user.password = this.password.value;
 
-    this.authService.loginMonitor(this.user).subscribe(
-      (user) => {
-        responseOK = true;
-        this.user.access_token = user.access_token;
-        this.localStorageService.set('access_token', user.access_token);
-        this.localStorageService.set('monitor_id', user.user_id);
-        this.localStorageService.set('mode', 'monitor');
+    this.authService
+      .loginMonitor(this.user)
+      .pipe(
+        finalize(async () => {
+          await this.sharedService.managementToast(
+            'toastFeedback',
+            responseOK,
+            undefined,
+            'Login correcto'
+          );
 
-        this._router.navigate(['/monitor/profile']);
-      },
-      (error) => {
-        console.log('Error es ', error);
-        responseOK = false;
-        errorResponse = error.error;
-      }
-    );
+          if (responseOK) {
+            this._router.navigate(['/monitor/profile']);
+          }
+        })
+      )
+      .subscribe(
+        (user) => {
+          responseOK = true;
+          this.user.access_token = user.access_token;
+          this.localStorageService.set('access_token', user.access_token);
+          this.localStorageService.set('monitor_id', user.user_id);
+          this.localStorageService.set('mode', 'monitor');
+        },
+        (error) => {
+          responseOK = false;
+          errorResponse = error.error;
+        }
+      );
   }
 }

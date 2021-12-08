@@ -22,7 +22,6 @@
           <button class="button mt-3" type="submit" [disabled]="!loginForm.valid">LOGIN</button>
         </form>
       </div>
-    </div>
     
     <div *ngIf="email.errors">
       <span
@@ -48,4 +47,9 @@
         >
       </span>
 
+    </div>
+
+    <div class="toastDiv">
+      <p id="toastFeedback"></p>
+    </div>
 </div>

@@ -9,12 +9,13 @@ import {
 import { finalize } from 'rxjs/operators';
 import { UserDTO } from 'src/app/models/user.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   profileUser: UserDTO;
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private sharedService: SharedService,
     private localStorageService: LocalStorageService
   ) {
     this.userId = '';
@@ -110,9 +112,9 @@ export class ProfileComponent implements OnInit {
             gender: this.gender,
           });
         },
-        (error) => {
+        async (error) => {
           errorResponse = error.error;
-          //TODO: Mostrar error
+          await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }
@@ -137,23 +139,21 @@ export class ProfileComponent implements OnInit {
         .updateUser(userId, this.profileUser)
         .pipe(
           finalize(async () => {
-            // await this.sharedService.managementToast(
-            //   'profileFeedback',
-            //   responseOK,
-            //   errorResponse
-            // );
-            //TODO: Mostrar toast
+            await this.sharedService.managementToast(
+              'toastFeedback',
+              responseOK,
+              errorResponse,
+              'Datos guardados correctamente'
+            );
           })
         )
         .subscribe(
-          (resp) => {
+          () => {
             responseOK = true;
           },
           (error) => {
             responseOK = false;
             errorResponse = error.error;
-
-            //this.sharedService.errorLog(errorResponse);
           }
         );
     }

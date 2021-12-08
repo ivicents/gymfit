@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { SharedService } from 'src/app/services/shared.service';
 import { UserService } from 'src/app/services/user.service';
 import { UserDTO } from '../../../models/user.dto';
 
@@ -30,6 +32,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private sharedService: SharedService,
     private _router: Router
   ) {
     this.user = new UserDTO(
@@ -93,20 +96,32 @@ export class RegisterComponent implements OnInit {
     this.user.password = this.password.value;
     this.user = this.registerForm.value;
 
-    this.userService.register(this.user).subscribe(
-      (user) => {
-        responseOK = true;
-        this.registerForm.reset();
-        // After reset form we set birthDate to today again (is an example)
-        this.birthday.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+    this.userService
+      .register(this.user)
+      .pipe(
+        finalize(async () => {
+          await this.sharedService.managementToast(
+            'toastFeedback',
+            responseOK,
+            errorResponse,
+            'Registrado correctamente'
+          );
 
-        this._router.navigate(['profile']);
-      },
-      (error) => {
-        console.log('Error es ', error);
-        responseOK = false;
-        errorResponse = error.error;
-      }
-    );
+          if (responseOK) {
+            this._router.navigate(['login']);
+          }
+        })
+      )
+      .subscribe(
+        () => {
+          responseOK = true;
+          this.registerForm.reset();
+          this.birthday.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+        },
+        (error) => {
+          responseOK = false;
+          errorResponse = error.error;
+        }
+      );
   }
 }
