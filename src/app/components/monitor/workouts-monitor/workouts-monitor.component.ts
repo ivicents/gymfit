@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { WorkoutDTO } from 'src/app/models/workout.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MonitorService } from 'src/app/services/monitor.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { WorkoutService } from 'src/app/services/workout.service';
 
 @Component({
   selector: 'app-workouts-monitor',
@@ -15,7 +18,9 @@ export class WorkoutsMonitorComponent implements OnInit {
   constructor(
     private monitorService: MonitorService,
     private sharedService: SharedService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private workoutService: WorkoutService,
+    private router: Router
   ) {
     this.monitorWorkouts = [];
   }
@@ -38,5 +43,50 @@ export class WorkoutsMonitorComponent implements OnInit {
     }
   }
 
-  createWorkout(): void {}
+  createWorkout(): void {
+    this.router.navigateByUrl('/monitor/workouts/form/');
+  }
+
+  updateWorkout(workoutId: string | undefined): void {
+    if (workoutId) {
+      this.router.navigateByUrl('/monitor/workouts/form/' + workoutId);
+    }
+  }
+
+  deleteWorkout(workoutId: string | undefined): void {
+    let errorResponse: any;
+    let responseOK: boolean = false;
+    const workout = this.monitorWorkouts.find((w) => w.id === workoutId);
+
+    if (workoutId) {
+      let result = confirm('Deseas borrar el workout: ' + workout?.name + '.');
+      if (result) {
+        this.workoutService
+          .deleteWorkout(workoutId)
+          .pipe(
+            finalize(async () => {
+              await this.sharedService.managementToast(
+                'toastFeedback',
+                responseOK,
+                errorResponse,
+                'Workout eliminado correctamente'
+              );
+
+              if (responseOK) {
+                this.loadWorkouts();
+              }
+            })
+          )
+          .subscribe(
+            (resp) => {
+              responseOK = true;
+            },
+            (error) => {
+              responseOK = false;
+              errorResponse = error.error;
+            }
+          );
+      }
+    }
+  }
 }

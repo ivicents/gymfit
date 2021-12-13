@@ -4,6 +4,7 @@ import { IncidencesMonitorComponent } from './components/monitor/incidences-moni
 import { LoginMonitorComponent } from './components/monitor/login-monitor/login-monitor.component';
 import { ProfileMonitorComponent } from './components/monitor/profile-monitor/profile-monitor.component';
 import { UsersMonitorComponent } from './components/monitor/users-monitor/users-monitor.component';
+import { WorkoutsMonitorFormComponent } from './components/monitor/workouts-monitor-form/workouts-monitor-form.component';
 import { WorkoutsMonitorComponent } from './components/monitor/workouts-monitor/workouts-monitor.component';
 import { IncidencesComponent } from './components/user/incidences/incidences.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -64,6 +65,16 @@ const routes: Routes = [
   {
     path: 'monitor/workouts',
     component: WorkoutsMonitorComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'monitor/workouts/form/:id',
+    component: WorkoutsMonitorFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'monitor/workouts/form',
+    component: WorkoutsMonitorFormComponent,
     canActivate: [AuthGuard],
   },
   {

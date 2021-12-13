@@ -28,20 +28,3 @@
 <div class="toastDiv">
     <p id="toastFeedback"></p>
   </div>
-<div class="workouts-content">
-    <div class="row">
-        <div class="col">
-            <h5>Mis rutinas</h5>
-                <div *ngFor="let workout of monitorWorkouts">
-                    <div class="workout-card">
-                        <b>{{workout.name}}</b>
-                        <button (click)="deleteWorkout(workout.id)"><i class="fa fa-trash"></i></button>
-                        <button (click)="updateWorkout(workout.id)"><i class="fa fa-edit"></i></button>
-                    </div>
-                </div>
-        </div>
-        <div class="col-4 workout-buttons">
-            <button class="button mt-3" (click)="createWorkout()">CREAR RUTINA</button>
-        </div>
-    </div>
-</div>
