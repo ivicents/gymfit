@@ -28,3 +28,26 @@
 <div class="toastDiv">
     <p id="toastFeedback"></p>
   </div>
+  <div class="workouts-form-content">
+    <div class="row">
+        <div class="col">
+            <h5>{{workout?.name}}</h5>
+                <div *ngFor="let exercise of workout.exercises">
+                    <div class="exercise-card">
+                        <b>{{exercise.name}}</b>
+                        <button (click)="deleteExercise(exercise.id)"><i class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+        </div>
+        <div *ngIf="exercisesList.length" class="col-4 exercise-buttons">
+            <button class="button mt-3" (click)="addExercise()">AÑADIR EJERCICIO</button>
+            <h5>Ejercicios disponibles</h5>
+            <div [formGroup]="exerciseForm">
+                <select class="custom-select" [ngModel]="exerciseSelected" (ngModelChange)="selectExercise($event)" formControlName="exercise">
+                    <option value="" disabled>Elige el ejercicio</option>
+                    <option *ngFor="let ex of exercisesList" [ngValue]="ex">{{ex?.name}}</option>
+                 </select>
+            </div>
+        </div>
+    </div>
+</div>

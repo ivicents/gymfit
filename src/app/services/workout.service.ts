@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ExerciseDTO } from '../models/exercise.dto';
+import { WorkoutDTO } from '../models/workout.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +18,13 @@ export class WorkoutService {
 
   deleteWorkout(workoutId: string): Observable<any> {
     return this.http.delete<any>(this.urlGymfit, { body: { workoutId } });
+  }
+
+  getWorkoutWithExercises(workoutId: string): Observable<WorkoutDTO> {
+    return this.http.get<WorkoutDTO>(this.urlGymfit + '/' + workoutId);
+  }
+
+  getExercises(): Observable<ExerciseDTO[]> {
+    return this.http.get<ExerciseDTO[]>('http://localhost:3100/exercise');
   }
 }
