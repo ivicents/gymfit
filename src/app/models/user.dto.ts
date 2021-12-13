@@ -7,6 +7,8 @@ export class UserDTO {
   birthday: Date;
   email: string;
   password: string;
+  idWorkout?: number;
+  workoutName?: string;
 
   constructor(
     name: string,

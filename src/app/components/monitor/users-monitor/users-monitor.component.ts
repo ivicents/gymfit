@@ -50,7 +50,7 @@ export class UsersMonitorComponent implements OnInit {
       this.monitorService.getMonitorUsers(monitorId).subscribe(
         (usuarios: UserDTO[]) => {
           this.userList = usuarios;
-          this.userSelected = usuarios[0];
+          this.selectUser(usuarios[0]);
         },
         async (error) => {
           await this.sharedService.managementToast('toastFeedback', false);
@@ -79,6 +79,12 @@ export class UsersMonitorComponent implements OnInit {
 
   selectUser(user: any): void {
     this.userSelected = user;
+    const userWorkout = this.monitorWorkouts.find(
+      (workout) => workout.id === this.userSelected?.idWorkout
+    );
+    if (userWorkout) {
+      this.userSelected!.workoutName = userWorkout.name;
+    }
   }
 
   async updateUserWorkout(): Promise<void> {

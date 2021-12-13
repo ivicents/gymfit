@@ -49,6 +49,7 @@
                 <b>Fecha nacimiento:</b> {{userSelected?.birthday | date:"dd/MM/yyyy"}} <br>
                 <b>Genero:</b> {{userSelected?.gender}} <br>
                 <b>Email:</b> {{userSelected?.email}} <br>
+                <b *ngIf="userSelected?.workoutName">Rutina:</b> {{userSelected?.workoutName}}
             </div>
             <br>
             <h5>Rutinas disponibles</h5>
