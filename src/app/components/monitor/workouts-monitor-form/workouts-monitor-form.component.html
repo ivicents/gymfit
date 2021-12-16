@@ -38,6 +38,26 @@
                         <button (click)="deleteExercise(exercise.id)"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
+            <div *ngIf="!workoutId">
+                <form [formGroup]="workoutNameForm" (ngSubmit)="createWorkout()">
+                    <!-- <div>
+                        <textarea placeholder="Nombre de la rutina" [formControl]="nameWorkout"></textarea>
+                    </div> -->
+                    <input type="text" [formControl]="nameWorkout" class="form-control" id="inputNameWorkout" placeholder="Nombre de la rutina">
+                    <button class="button mt-3" type="submit" [disabled]="!workoutNameForm.valid">CREATE</button>
+                  </form>
+        
+                  <div *ngIf="nameWorkout.errors">
+                    <span
+                      style="color: red"
+                      *ngIf="nameWorkout.errors && (nameWorkout.touched || nameWorkout.dirty)"
+                    >
+                      <span *ngIf="nameWorkout.errors.required">Workout name is required</span>
+                      <span *ngIf="nameWorkout.errors.minlength">Workout name must be at least 4 characters long.</span>
+                      <span *ngIf="nameWorkout.errors.maxlength">Workout name can be max 250 characters long</span>
+                    </span>         
+                  </div>
+            </div>
         </div>
         <div *ngIf="exercisesList.length" class="col-4 exercise-buttons">
             <button class="button mt-3" (click)="addExercise()">AÑADIR EJERCICIO</button>

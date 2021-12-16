@@ -27,4 +27,30 @@ export class WorkoutService {
   getExercises(): Observable<ExerciseDTO[]> {
     return this.http.get<ExerciseDTO[]>('http://localhost:3100/exercise');
   }
+
+  addExerciseToWorkout(
+    workoutId: string,
+    exerciseId: string
+  ): Observable<void> {
+    return this.http.post<void>(this.urlGymfit + '/addExercise', {
+      workoutId,
+      exerciseId,
+    });
+  }
+
+  deleteExerciseToWorkout(
+    workoutId: string,
+    exerciseId: string
+  ): Observable<any> {
+    return this.http.delete<any>(
+      this.urlGymfit + '/' + workoutId + '/exercise/' + exerciseId
+    );
+  }
+
+  createWorkout(workoutName: string, monitorId: string): Observable<any> {
+    return this.http.post<any>(this.urlGymfit, {
+      workoutName,
+      monitorId,
+    });
+  }
 }
