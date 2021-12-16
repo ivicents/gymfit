@@ -29,7 +29,7 @@
 }
 
 .monitor-users {
-  margin: 24px;
+  margin-left: 24px;
 }
 
 .monitor-user-img {
@@ -44,4 +44,28 @@
   border-radius: 50%;
   height: 80px;
   width: 80px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  .monitor-users-content {
+    margin-left: 8px;
+  }
+
+  .monitor-users {
+    margin-left: 0px;
+  }
+
+  .user-list {
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .row {
+    display: block;
+  }
 }
