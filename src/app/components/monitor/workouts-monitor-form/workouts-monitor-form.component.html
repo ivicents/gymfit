@@ -40,9 +40,6 @@
                 </div>
             <div *ngIf="!workoutId">
                 <form [formGroup]="workoutNameForm" (ngSubmit)="createWorkout()">
-                    <!-- <div>
-                        <textarea placeholder="Nombre de la rutina" [formControl]="nameWorkout"></textarea>
-                    </div> -->
                     <input type="text" [formControl]="nameWorkout" class="form-control" id="inputNameWorkout" placeholder="Nombre de la rutina">
                     <button class="button mt-3" type="submit" [disabled]="!workoutNameForm.valid">CREATE</button>
                   </form>

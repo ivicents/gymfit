@@ -40,3 +40,14 @@
     max-width: 200px;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  .row {
+    display: block;
+  }
+}

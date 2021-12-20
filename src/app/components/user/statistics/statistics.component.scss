@@ -26,3 +26,9 @@
     text-align: center;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .flex-item {
+    margin-left: 8px;
+  }
+}
