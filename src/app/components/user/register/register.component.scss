@@ -71,3 +71,12 @@ input {
   color: pink;
 }
 /* END CUSTOM RADIO */
+
+@media only screen and (max-width: 768px) {
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+}
