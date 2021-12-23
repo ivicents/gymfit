@@ -53,4 +53,8 @@ export class UserService {
       { workoutId }
     );
   }
+
+  getUSerStatistics(userId: string): Observable<any> {
+    return this.http.get<any>(this.urlGymfit + '/' + userId + '/statistics');
+  }
 }
