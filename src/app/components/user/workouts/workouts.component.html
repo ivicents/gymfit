@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="header-navbar navbar navbar-expand-lg navbar-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/profile">
             <img src="../../../../assets/img/logo.png" alt="Gymfit logo" height="36">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,7 @@
 <div class="workouts-content">
     <div class="row">
         <div class="col">
+            <h5 class="no-workout" *ngIf="!hasWorkout">No tienes asignada una rutina</h5>
             <h5>{{workout.name}}</h5>
             <div class="user-exercises">
                 <div *ngFor="let exercise of workout.exercises">

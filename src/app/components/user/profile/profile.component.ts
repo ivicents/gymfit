@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
 
     this.name = new FormControl(this.profileUser.name, [
       Validators.required,
-      Validators.minLength(5),
+      Validators.minLength(3),
       Validators.maxLength(25),
     ]);
 

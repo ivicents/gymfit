@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class WorkoutsComponent implements OnInit {
   workout!: WorkoutDTO;
   workoutStarted: boolean;
+  hasWorkout: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,9 +36,11 @@ export class WorkoutsComponent implements OnInit {
       this.userService.getUserWorkout(userId).subscribe(
         (workout: WorkoutDTO) => {
           this.workout = workout;
+          this.hasWorkout = true;
         },
         async (error) => {
-          await this.sharedService.managementToast('toastFeedback', false);
+          this.hasWorkout = false;
+          //await this.sharedService.managementToast('toastFeedback', false);
         }
       );
     }
