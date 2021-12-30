@@ -35,14 +35,7 @@ export class RegisterComponent implements OnInit {
     private sharedService: SharedService,
     private _router: Router
   ) {
-    this.user = new UserDTO(
-      'Mar',
-      'Gomez',
-      'male',
-      new Date(),
-      'mar@gmail.com',
-      'testtest'
-    );
+    this.user = new UserDTO('', '', '', new Date(), '', '');
     this.status = '';
     this.isValidForm = null;
 

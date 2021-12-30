@@ -105,6 +105,8 @@ export class UsersMonitorComponent implements OnInit {
         .subscribe(
           () => {
             responseOK = true;
+            this.userSelected!.idWorkout = parseInt(this.workoutSelected!.id!);
+            this.userSelected!.workoutName = this.workoutSelected?.name;
           },
           (error) => {
             responseOK = false;
