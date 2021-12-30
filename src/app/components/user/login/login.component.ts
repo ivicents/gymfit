@@ -84,7 +84,6 @@ export class LoginComponent implements OnInit {
           this.localStorageService.set('mode', 'user');
         },
         (error) => {
-          console.log('Error es ', error);
           responseOK = false;
           errorResponse = error.error;
         }
