@@ -11,7 +11,7 @@ export class IncidenceService {
 
   constructor(private http: HttpClient) {
     this.controller = 'incidence';
-    this.urlGymfit = 'http://13.38.93.235:3100/' + this.controller;
+    this.urlGymfit = 'https://13.38.93.235:3101/' + this.controller;
   }
 
   sendIncidence(

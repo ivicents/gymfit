@@ -13,7 +13,7 @@ export class WorkoutService {
 
   constructor(private http: HttpClient) {
     this.controller = 'workout';
-    this.urlGymfit = 'http://13.38.93.235:3100/' + this.controller;
+    this.urlGymfit = 'https://13.38.93.235:3101/' + this.controller;
   }
 
   deleteWorkout(workoutId: string): Observable<any> {
@@ -25,7 +25,7 @@ export class WorkoutService {
   }
 
   getExercises(): Observable<ExerciseDTO[]> {
-    return this.http.get<ExerciseDTO[]>('http://13.38.93.235:3100/exercise');
+    return this.http.get<ExerciseDTO[]>('https://13.38.93.235:3101/exercise');
   }
 
   addExerciseToWorkout(
