@@ -36,7 +36,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     WorkoutsMonitorFormComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
