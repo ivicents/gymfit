@@ -28,6 +28,7 @@
     "echarts": "^5.2.2",
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
+    "localstorage-polyfill": "^1.0.1",
     "ngx-echarts": "^8.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
