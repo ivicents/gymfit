@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.controller = 'login';
-    this.urlGymfit = 'http://localhost:3100/' + this.controller;
+    this.urlGymfit = 'http://13.38.93.235:3100/' + this.controller;
   }
 
   login({ email, password }: AuthDTO): Observable<AuthToken> {
