@@ -14,7 +14,7 @@ export class MonitorService {
 
   constructor(private http: HttpClient) {
     this.controller = 'monitor';
-    this.urlGymfit = 'http://localhost:3100/' + this.controller;
+    this.urlGymfit = 'https://13.38.93.235:3101/' + this.controller;
   }
 
   updateMonitor(
