@@ -13,11 +13,11 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.controller = 'user';
-    this.urlGymfit = 'https://13.38.93.235:3101/' + this.controller;
+    this.urlGymfit = 'https://15.188.12.145:3101/' + this.controller;
   }
 
   register(user: UserDTO): Observable<UserDTO> {
-    return this.http.post<UserDTO>('https://13.38.93.235:3101/register', user);
+    return this.http.post<UserDTO>('https://15.188.12.145:3101/register', user);
   }
 
   updateUser(userId: string, user: UserDTO): Observable<UserDTO> {
@@ -30,7 +30,7 @@ export class UserService {
 
   getUserWorkout(userId: string): Observable<WorkoutDTO> {
     return this.http.get<WorkoutDTO>(
-      'https://13.38.93.235:3101/workout/user' + '/' + userId
+      'https://15.188.12.145:3101/workout/user' + '/' + userId
     );
   }
 
