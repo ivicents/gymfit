@@ -1,3 +1,5 @@
+@import "../../../../styles.scss";
+
 .profile-content::before {
   content: "";
   position: fixed;
@@ -35,3 +37,20 @@
   color: pink;
 }
 /* END CUSTOM RADIO */
+
+.logout-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  > a {
+    color: $blanco;
+    &:hover,
+    &:focus {
+      color: $principal;
+    }
+  }
+}

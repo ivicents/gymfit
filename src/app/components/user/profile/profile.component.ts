@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { UserDTO } from 'src/app/models/user.dto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private sharedService: SharedService,
+    private _router: Router,
     private localStorageService: LocalStorageService
   ) {
     this.userId = '';
@@ -157,5 +159,13 @@ export class ProfileComponent implements OnInit {
           }
         );
     }
+  }
+
+  logout(): void {
+    this.localStorageService.remove('user_id');
+    this.localStorageService.remove('access_token');
+    this.localStorageService.remove('mode');
+
+    this._router.navigateByUrl('/');
   }
 }
